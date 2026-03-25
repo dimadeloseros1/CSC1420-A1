@@ -10,21 +10,19 @@ int main() {
 
 void userInput() {
     string userInput;
+    string reversedStr;
 
     cout << "Please enter an input of your choice: ";
     stack<char> st;
-    // stack<string> temp;
 
     while (getline(cin, userInput)) {
         cout << userInput << endl;
         break;
     }
 
-    for (char c : userInput) {
-        st.push(c);
+    for (int i = 0; i < userInput.length(); i++) {
+        st.push(userInput.at(i));
     }
-
-    string reversedStr;
 
     while (!st.empty()) {
         reversedStr += st.top();
