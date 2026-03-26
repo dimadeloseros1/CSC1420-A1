@@ -2,13 +2,15 @@
 #include <stack>
 using namespace std;
 
-void userInput();
+string userInput();
+string applyConstraints(string input);
 
 int main() {
-    userInput();
+    string input = userInput();
+    applyConstraints(input);
 }
 
-void userInput() {
+string userInput() {
     string userInput;
     string reversedStr;
 
@@ -29,5 +31,19 @@ void userInput() {
         st.pop();
     }
 
-    cout << reversedStr;
+    return reversedStr;
+}
+
+string applyConstraints(string input) {
+    string result;
+    for (int i = 0; i < input.length(); i++) {
+        if (input.at(i) == ',' || input.at(i) == '.') {
+            continue;
+        }
+        else {
+            result += input.at(i);
+        }
+    }
+    cout << result;
+    return result;
 }
