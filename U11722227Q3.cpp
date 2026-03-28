@@ -6,25 +6,20 @@
 
 using namespace std;
 
-vector<int> readingFile();
 
+vector<int> readingFile();
 void sortingNums(vector<int> &result);
+void selectionSort(vector<int> &arr);
+void printArr(vector<int> &arr);
+void sortingNumsTwo(vector<int> input);
 
 int main() {
-    auto start = chrono::high_resolution_clock::now();
-
     vector<int> input = readingFile();
-    sortingNums(input);
+    // sortingNums(input);
 
-    auto end = chrono::high_resolution_clock::now();
-    chrono::duration<double, milli> time_ms = end - start;
-    auto int_ms = chrono::duration_cast<chrono::milliseconds>(time_ms);
-
-    chrono::duration<long,  micro> int_us = int_ms;
-
-    cout << time_ms.count() << " ms." << endl;
-    cout << int_ms.count() << " ms." << endl;
-    cout << int_us.count() << " us." << endl;
+    // selectionSort(input);
+    // printArr(input);
+    sortingNumsTwo(input);
 }
 
 vector<int> readingFile() {
@@ -46,6 +41,7 @@ void sortingNums(vector<int> &result) {
      * Inbuilt sort function that sorts the data according to which data structure we are using.
      * Most of the time the "sort" function will use the C++ inbuilt sorting algorithm called "introsort" to sort the data that we are working with
      */
+    auto start = chrono::high_resolution_clock::now();
 
     sort(result.begin(), result.end());
 
@@ -53,6 +49,15 @@ void sortingNums(vector<int> &result) {
     for (int i = 0; i < result.size(); i++) {
         cout << result.at(i) << endl;
     }
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> time_ms = end - start;
+    auto int_ms = chrono::duration_cast<chrono::milliseconds>(time_ms);
+
+    chrono::duration<long, micro> int_us = int_ms;
+
+    cout << time_ms.count() << " Sort ms." << endl;
+    cout << int_ms.count() << " Sort ms." << endl;
+    cout << int_us.count() << " Sort us." << endl;
 }
 
 void selectionSort(vector<int> &arr) {
@@ -69,9 +74,40 @@ void selectionSort(vector<int> &arr) {
     }
 }
 
-void printArray(vector<int> &arr) {
-    for (int &val : arr) {
-        cout << val << " ";
+void printArr(vector<int> &arr) {
+    auto start = chrono::high_resolution_clock::now();
+    for (int i = 1; i <= 10; i++) {
+        for (int &val: arr) {
+            cout << val << " ";
+        }
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double, milli> time_ms = end - start;
+        auto int_ms = chrono::duration_cast<chrono::milliseconds>(time_ms);
+        chrono::duration<long, micro> int_us = int_ms;
+
+        cout << endl;
+        cout << i << ": " << time_ms.count() << " Selection Sort ms" << endl;
+        cout << i << ": " << int_ms.count() << " Selection Sort ms" << endl;
+        cout << i << ": " << int_us.count() << " Selection Sort us" << endl;
     }
-    cout << endl;
+}
+
+
+void sortingNumsTwo(vector<int> input) {
+    double totalTime = 0.0;
+
+    for (int i = 1; i <= 10; i++) {
+        vector<int> arr = input;
+
+        auto start = chrono::high_resolution_clock::now();
+        sort(arr.begin(), arr.end());
+        auto end = chrono::high_resolution_clock::now();
+
+        chrono::duration<double, milli> time_ms = end - start;
+        totalTime += time_ms.count();
+
+        cout << "Run" << i << ": " << time_ms.count() << " ms" << endl;
+    }
+
+    cout << "Average Sort time: " << (totalTime / 10.0) << " ms" << endl;
 }
