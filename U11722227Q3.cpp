@@ -20,6 +20,10 @@ int main() {
 
 vector<int> readingFile() {
     ifstream inputFile("RF1.txt");
+    if (!inputFile) {
+        cout << "Could not open RF1.txt" << endl;
+        return {};
+    }
     vector<int> result;
     int num;
 
@@ -35,7 +39,7 @@ vector<int> readingFile() {
 void sortingNums(vector<int> &input) {
     /*
      * Inbuilt sort function that sorts the data according to which data structure we are using.
-     * Most of the time the "sort" function will use the C++ inbuilt sorting algorithm called "introsort" to sort the data that we are working with
+     * Most of the time the "sort" inbuilt function will use the C++ inbuilt sorting algorithm called "introsort" to sort the data that we are working with
      */
     cout << "| ***SORT*** |" << endl;
     double time = 0;
@@ -46,13 +50,13 @@ void sortingNums(vector<int> &input) {
         auto start = chrono::high_resolution_clock::now();
         sort(result.begin(), result.end());
         auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> time_ms = end - start;
+        chrono::duration<double, micro> time_ms = end - start;
 
         time += time_ms.count();
-        cout << k << " iteration: " << time_ms.count() << " ms" << endl;
+        cout << k << " iteration: " << time_ms.count() << " us" << endl;
     }
 
-    cout << "Average Sort time: " << time / 10 << " ms" << endl << endl;
+    cout << "Average Sort time: " << time / 10 << " us" << endl << endl;
 }
 
 void selectionSort(vector<int> &arr) {
@@ -75,11 +79,11 @@ void selectionSort(vector<int> &arr) {
             swap(copy[i], copy[min_idx]);
         }
         auto end = chrono::high_resolution_clock::now();
-        chrono::duration<double, milli> time_ms = end - start;
+        chrono::duration<double, micro> time_ms = end - start;
 
         time += time_ms.count();
-        cout << k << " iteration: " << time_ms.count() << " ms" << endl;
+        cout << k << " iteration: " << time_ms.count() << " us" << endl;
     }
 
-    cout << "Average Selection Sort time: " << time / 10 << " ms" << endl;
+    cout << "Average Selection Sort time: " << time / 10 << " us" << endl;
 }
