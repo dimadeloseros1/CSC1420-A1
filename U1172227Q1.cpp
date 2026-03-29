@@ -2,25 +2,25 @@
 #include <stack>
 using namespace std;
 
-string userInput();
-string applyConstraints(string input);
+string reverseInput(const string &userInput);
+string applyConstraints(const string &input);
 
 int main() {
-    string input = userInput();
-    applyConstraints(input);
+    string input;
+    cout << "Please enter an input of your choice: ";
+
+    getline(cin, input);
+
+    string reversed = reverseInput(input);
+    string result = applyConstraints(reversed);
+
+    cout << "Original: " << input << endl;
+    cout << "Reversed: " << result << endl;
 }
 
-string userInput() {
-    string userInput;
+string reverseInput(const string &userInput) {
     string reversedStr;
-
-    cout << "Please enter an input of your choice: ";
     stack<char> st;
-
-    while (getline(cin, userInput)) {
-        cout << userInput << endl;
-        break;
-    }
 
     for (int i = 0; i < userInput.length(); i++) {
         st.push(userInput.at(i));
@@ -34,7 +34,7 @@ string userInput() {
     return reversedStr;
 }
 
-string applyConstraints(string input) {
+string applyConstraints(const string &input) {
     string result;
     for (int i = 0; i < input.length(); i++) {
         if (input.at(i) == ',' || input.at(i) == '.') {
@@ -44,6 +44,5 @@ string applyConstraints(string input) {
             result += input.at(i);
         }
     }
-    cout << result;
     return result;
 }
